@@ -1,0 +1,42 @@
+
+<!DOCTYPE html>
+<html ng-app="gold_rush" lang="en">
+<head>
+  <meta charset="UTF-8">
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.2/angular.js"></script>
+  <script src="main.js"></script>
+  <link rel="stylesheet" href="main.css">
+
+  <title>Gold rush project</title>
+</head>
+<body ng-controller="gold as golden">
+
+<!--back ground image  -->
+<div class="container" ng-click="golden.mouseClick($event); img =! img">
+
+
+  <img class="map"  src="https://raw.githubusercontent.com/KKetner87/mywork/master/ng.gold_rush/topo-co.jpg"></img>
+  <!-- <img class="marker" style= "top: {{golden.lastClickInfo.pageY}}px; left: {{golden.lastClickInfo.pageX}}px;" ng-show="img" ng-src="{{golden.img}}"></li> -->
+</div>
+<div ng-repeat='goldMine in golden.goldMines'
+    class="marker"
+    style= "position: absolute; top: {{goldMine.pageY}}vw; left: {{goldMine.pageX}}vw;">
+
+    <img class='flag' ng-src="{{golden.img}}" ng-click="golden.removeFlag($index)">
+
+    <div class="note">{{goldMine.note}}</div>
+</div>
+
+<form
+  ng-submit='golden.addNote()'
+  ng-show='golden.addingNote'
+  style= "position:absolute; top: {{golden.lastClickInfo.pageY-5}}vw; left: {{golden.lastClickInfo.pageX}}vw;">
+
+  <input ng-model='golden.note' type="text">
+  <button type="submit" name="button">Add note</button>
+</form>
+
+
+</body>
+</html>
